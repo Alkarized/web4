@@ -20,7 +20,7 @@ public class Point implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int x;
-    private int y;
+    private double y;
     private int r;
     private boolean result;
 

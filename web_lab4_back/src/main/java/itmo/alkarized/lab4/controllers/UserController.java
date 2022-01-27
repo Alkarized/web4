@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @Log
 @RestController
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-@CrossOrigin(value = "localhost:4200")
-public class UserController {
+    public class UserController {
     private final AuthenticationManager authenticationManager;
     private final UserAuthorization userAuthorization;
     private final JWTProvider jwtProvider;
@@ -31,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/authenticate")
-    public ResponseEntity<?> getToken(@RequestBody UserRequest userRequest){
+    public ResponseEntity<String> getToken(@RequestBody UserRequest userRequest){
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(userRequest.getUsername(), userRequest.getPassword())
@@ -46,7 +45,7 @@ public class UserController {
     public ResponseEntity<String> registerNewUser(@RequestBody UserRequest userRequest){
         log.info("register new user");
         if (userAuthorization.register(userRequest)) return new ResponseEntity<>(HttpStatus.OK);
-        else return new ResponseEntity<>("User with that name already exists", HttpStatus.BAD_REQUEST);
+        else return ResponseEntity.badRequest().body("User with that name already exists");
     }
 
 }

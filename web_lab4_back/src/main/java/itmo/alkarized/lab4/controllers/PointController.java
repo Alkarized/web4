@@ -13,10 +13,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Log
 @RequestMapping(value = "points", produces = MediaType.APPLICATION_JSON_VALUE)
-@CrossOrigin(value = "localhost:4200")
 public class PointController {
     private final PointRepository pointRepository;
     private final PointValidator validator;
@@ -51,6 +52,7 @@ public class PointController {
         log.info("get all points by username - " + jwtProvider.extractUsername(token.substring(7)));
         User user = userRepository.findByUsername(jwtProvider.extractUsername(token.substring(7)));
         if (user == null) return new ResponseEntity<>("Invalid username of person", HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(user.getPoints(), HttpStatus.OK);
+        List<Point> points = user.getPoints();
+        return new ResponseEntity<>(points, HttpStatus.OK);
     }
 }
