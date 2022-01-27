@@ -31,7 +31,7 @@
 * Все результаты проверки должны сохраняться в базе данных под управлением СУБД PostgreSQL.
 * Для доступа к БД необходимо использовать Spring Data.
 
-![area](src/main/resources/git_image/areas.png)
+![area](web_lab4_back/src/main/resources/git_image/areas.png)
 
 **Вопросы к защите лабораторной работы:**
 
